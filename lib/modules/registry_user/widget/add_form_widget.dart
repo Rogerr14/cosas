@@ -9,15 +9,15 @@ import 'package:prueba_telconet/shared/widget/text_button.dart';
 import 'package:prueba_telconet/shared/widget/text_form_field_widget.dart';
 import '../../../../env/theme/app_theme.dart';
 
-class RegisterWidget extends StatefulWidget {
-  const RegisterWidget({super.key, this.keyDismiss});
+class AddFormWidget extends StatefulWidget {
+  const AddFormWidget({super.key, this.keyDismiss});
   final GlobalKey<State<StatefulWidget>>? keyDismiss;
 
   @override
-  State<RegisterWidget> createState() => _RegisterWidgetState();
+  State<AddFormWidget> createState() => _AddFormWidgetState();
 }
 
-class _RegisterWidgetState extends State<RegisterWidget> {
+class _AddFormWidgetState extends State<AddFormWidget> {
   TextEditingController userController = TextEditingController();
   TextEditingController nameController = TextEditingController();
   TextEditingController lastnameController = TextEditingController();
@@ -167,7 +167,7 @@ class _RegisterWidgetState extends State<RegisterWidget> {
             child: FilledButtonWidget(
               color: AppTheme.secundaryColor,
               textButtonColor: AppTheme.white,
-              text: 'Registrar',
+              text: 'Crear Usuario',
               onPressed: () async{
                 if(  await authMethods.registerWithEmailAndPassword(userController.text, passwordController.text)){
                   databaseServices.createUser(name: nameController.text , lastName: lastnameController.text, email: userController.text);

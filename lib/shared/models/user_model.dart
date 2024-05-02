@@ -17,7 +17,7 @@ class UserModel {
 
   factory UserModel.fromFirestore(
     DocumentSnapshot<Map<String, dynamic>> snapshot,
-    SnapshotOptions? option,
+    
   ) {
     final data = snapshot.data();
     return UserModel(

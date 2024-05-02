@@ -3,12 +3,9 @@ import 'package:prueba_telconet/env/theme/app_theme.dart';
 
 class UserCardWidget extends StatelessWidget {
   const UserCardWidget({
-    super.key,  required this.icon, required this.onPress, required this.name, required this.lastName, required this.email, required this.acces,
+    super.key, required this.title, required this.icon, required this.onPress,
   });
-  final String name;
-  final String lastName;
-  final String email;
-  final List<dynamic> acces;
+  final String title;
   final IconData icon;
   final void Function() onPress;
 
@@ -28,14 +25,10 @@ class UserCardWidget extends StatelessWidget {
                 children: [
                   Column(
                     mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text('Nombre: $name', style: TextStyle(color: AppTheme.white, fontSize: 15, fontWeight: FontWeight.w600),),
-                      Text('Apellido: $lastName', style: TextStyle(color: AppTheme.white, fontSize: 15, fontWeight: FontWeight.w600),),
-                      Text('Correo: $email', style: TextStyle(color: AppTheme.white, fontSize: 15, fontWeight: FontWeight.w600),),
-                      // Text('Accesos: $acces', style: TextStyle(color: AppTheme.white, fontSize: 10, fontWeight: FontWeight.w600),),
+                      Text(title, style: TextStyle(color: AppTheme.white, fontSize: 20, fontWeight: FontWeight.w600),),
                       SizedBox(height: 10,),
-                      
+                      Icon(icon, color: AppTheme.white, size: 20,),
                     ],
                   )
                 ],

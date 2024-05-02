@@ -1,12 +1,12 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
+// import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:prueba_telconet/shared/models/user_model.dart';
+
 
 class FirebaseAuthentication {
   FirebaseAuth auth = FirebaseAuth.instance;
-  var db = FirebaseFirestore.instance;
-
+  String uid= '';
+ 
   Future<bool> registerWithEmailAndPassword(
       String email, String password) async {
     try {
@@ -14,7 +14,7 @@ class FirebaseAuthentication {
         email: email,
         password: password,
       );
-      debugPrint('${userCredential.user!.email}');
+      uid = userCredential.user!.uid;
       return true;
     } on FirebaseAuthException catch (e) {
       if (e.code == 'weak-password') {
@@ -35,18 +35,7 @@ class FirebaseAuthentication {
         password: password,
       );
       debugPrint('${userCredential.user!.email}');
-
-      // final data = {"capital": true};
-
-      // db.collection("cities").doc("").set(data, SetOptions(merge: true));
-      final rol = db.collection("users");
-      final snapshot = await rol.where("email", isEqualTo: email).withConverter(
-          fromFirestore: UserModel.fromFirestore,
-          toFirestore: (UserModel user, _) => user.toFirstore());
-      final docSnap = snapshot.get();
-      final userInfo = docSnap.then((value) => value.docs);
-      
-      debugPrint('lista: $userInfo');
+      // databaseServices.getAllRegistry();
       return true;
     } on FirebaseAuthException catch (e) {
       if (e.code == 'user-not-found') {

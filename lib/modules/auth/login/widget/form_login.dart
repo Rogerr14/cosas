@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:prueba_telconet/modules/admin/pages/admin_page.dart';
 import 'package:prueba_telconet/modules/auth/register/pages/register_page.dart';
+import 'package:prueba_telconet/modules/user/pages/user_page.dart';
 import 'package:prueba_telconet/shared/helpers/global_helpers.dart';
 import 'package:prueba_telconet/shared/provider/functional_provider.dart';
 import 'package:prueba_telconet/shared/services/auth_service.dart';
+import 'package:prueba_telconet/shared/services/db_service.dart';
 import 'package:prueba_telconet/shared/widget/filled_button.dart';
 import 'package:prueba_telconet/shared/widget/placeholder.dart';
 import 'package:prueba_telconet/shared/widget/text_button.dart';
@@ -36,10 +38,18 @@ class _FormLoginWidgetState extends State<FormLoginWidget> {
   }
 
   @override
+  void dispose() {
+    userController;
+    passwordController;
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     final fp = Provider.of<FunctionalProvider>(context, listen: false);
     FirebaseAuthentication authMethods = FirebaseAuthentication();
+    FirebaseDatabaseServices databaseServices = FirebaseDatabaseServices();
 
     return Form(
       key: _formKey,
@@ -98,15 +108,43 @@ class _FormLoginWidgetState extends State<FormLoginWidget> {
                 color: AppTheme.secundaryColor,
                 textButtonColor: AppTheme.white,
                 text: 'Iniciar sesión',
-                onPressed: () {
+                onPressed: () async {
                   if (_formKey.currentState!.validate()) {
-                    authMethods.signInWithEmailAndPassword(
+                    bool isSingin = await authMethods.signInWithEmailAndPassword(
                         userController.text, passwordController.text);
-                    Navigator.pushAndRemoveUntil(
-                        context,
-                        GlobalHelper.navigationFadeIn(
-                            context, const AdminPanelPage()),
-                        (route) => false);
+                     String rol = await  databaseServices.getRollUser(userController.text);
+                     
+                    if (isSingin) {
+                      // debugPrint('aqui funca');
+                      // debugPrint('rol2: $rol');
+                      if (rol == "admin") {
+                        Navigator.pushAndRemoveUntil(
+                            context,
+                            GlobalHelper.navigationFadeIn(
+                              context,
+                              const AdminPanelPage(),
+                            ),
+                            (route) => false);
+                      } else if (databaseServices.rol.trim() == "user") {
+                        debugPrint('entra en user');
+                        Navigator.pushAndRemoveUntil(
+                          context,
+                          GlobalHelper.navigationFadeIn(
+                              context, const UserPage()),
+                          (route) => false,
+                        );
+                      }
+                      //     Navigator.pushAndRemoveUntil(
+                      // context,
+                      // GlobalHelper.navigationFadeIn(
+                    }
+                    //     context, const AdminPanelPage()),
+                    // (route) => false);
+                    // Navigator.pushAndRemoveUntil(
+                    //     context,
+                    //     GlobalHelper.navigationFadeIn(
+                    //         context, const AdminPanelPage()),
+                    //     (route) => false);
                   }
                 },
               )),

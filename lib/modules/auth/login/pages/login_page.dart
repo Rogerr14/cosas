@@ -17,7 +17,7 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return const LayoutWidget(
-    
+      // requiredStack: false,
       child: Padding(
         padding: EdgeInsets.symmetric(horizontal: 30, vertical: 180),
         child: SingleChildScrollView(

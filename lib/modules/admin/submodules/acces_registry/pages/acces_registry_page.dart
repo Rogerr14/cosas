@@ -70,6 +70,7 @@
 import 'package:flutter/material.dart';
 import 'package:prueba_telconet/env/theme/app_theme.dart';
 import 'package:prueba_telconet/modules/admin/submodules/acces_registry/widget/user_card_widget.dart';
+import 'package:prueba_telconet/shared/services/db_service.dart';
 // import 'package:prueba_telconet/shared/widget/filled_button.dart';
 import 'package:prueba_telconet/shared/widget/layout_widget.dart';
 
@@ -84,6 +85,7 @@ class AccessRegistryPage extends StatefulWidget {
 }
 
 class _AccessRegistryPageState extends State<AccessRegistryPage> {
+  FirebaseDatabaseServices databaseServices = FirebaseDatabaseServices();
   @override
   Widget build(BuildContext context) {
     return LayoutWidget(
@@ -118,12 +120,16 @@ class _AccessRegistryPageState extends State<AccessRegistryPage> {
            SizedBox(height: 20,),
             // FilledButtonWidget(text: 'Agregar usuarios', onPressed: (){},),
             Expanded(
-              child: ListView.builder(
-                itemCount: 10,    
-                itemBuilder: (context, index) => UserCardWidget(title: index.toString(), icon: Icons.abc, onPress: (){
-                  
-                }),
-                ),
+              child: FutureBuilder(
+                future: databaseServices.getAllRegistry(),
+                builder:(context, snapshot) => 
+                 ListView.builder(
+                  itemCount:databaseServices.usuarios.length,    
+                  itemBuilder: (context, index) {
+                    final user = databaseServices.usuarios[index];
+                     return UserCardWidget(name: user.name, icon: Icons.abc, lista: user.singin,);},
+                  ),
+              ),
             ),
           ],
         ),

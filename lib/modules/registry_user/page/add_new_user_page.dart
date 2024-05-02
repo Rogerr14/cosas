@@ -16,6 +16,7 @@ class AddNewUserPage extends StatefulWidget {
 class _AddNewUserPageState extends State<AddNewUserPage> {
   @override
   Widget build(BuildContext context) {
+   
     final size = MediaQuery.of(context).size;
     return LayoutWidget(
       nameInterceptor: 'addUser',
@@ -40,15 +41,17 @@ class _AddNewUserPageState extends State<AddNewUserPage> {
             ],
           ),
         ),
-        body: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              
-              SizedBox(height: 20),
-              AddFormWidget(keyDismiss: widget.keyPage),
-              
-            ],
+        body: SingleChildScrollView(
+          child: Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                
+                SizedBox(height: 20),
+                AddFormWidget(keyDismiss: widget.keyPage),
+                
+              ],
+            ),
           ),
         ),
       ),

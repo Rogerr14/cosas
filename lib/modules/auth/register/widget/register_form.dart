@@ -188,7 +188,9 @@ class _RegisterWidgetState extends State<RegisterWidget> {
           fontWeight: FontWeight.bold,
           nameButton: 'Cancelar',
           onPressed: () {
-            
+             setState(() {
+      
+    });
             final fp = Provider.of<FunctionalProvider>(context, listen: false);
             fp.dismissAlert(key: widget.keyDismiss!);
           },

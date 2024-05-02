@@ -3,11 +3,12 @@ import 'package:prueba_telconet/env/theme/app_theme.dart';
 
 class UserCardWidget extends StatelessWidget {
   const UserCardWidget({
-    super.key, required this.title, required this.icon, required this.onPress,
+    super.key,  required this.icon,  required this.name, required this.lista,
   });
-  final String title;
+  final String name;
+  final List<dynamic> lista;
   final IconData icon;
-  final void Function() onPress;
+  // final void Function() onPress;
 
   @override
   Widget build(BuildContext context) {
@@ -15,7 +16,7 @@ class UserCardWidget extends StatelessWidget {
         color: AppTheme.secundaryColor,
         clipBehavior: Clip.hardEdge,
         child: InkWell(
-          onTap: onPress,
+          // onTap: onPress,
           child:  SizedBox(
             width: 350,
             height: 100,
@@ -26,9 +27,15 @@ class UserCardWidget extends StatelessWidget {
                   Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Text(title, style: TextStyle(color: AppTheme.white, fontSize: 20, fontWeight: FontWeight.w600),),
+                      Text(name, style: TextStyle(color: AppTheme.white, fontSize: 20, fontWeight: FontWeight.w600),),
                       SizedBox(height: 10,),
-                      Icon(icon, color: AppTheme.white, size: 20,),
+                      if(lista.isNotEmpty)
+                      Text(DateTime.fromMicrosecondsSinceEpoch(lista[0].seconds*1000000).toString(), style: TextStyle(color: AppTheme.white, fontSize: 10, fontWeight: FontWeight.w600),),
+                      SizedBox(height: 10,),
+                      if(lista.isNotEmpty)
+                      Text(lista[1], style: TextStyle(color: AppTheme.white, fontSize: 20, fontWeight: FontWeight.w600),),
+                      
+                      
                     ],
                   )
                 ],

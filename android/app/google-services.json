@@ -1,0 +1,49 @@
+{
+  "project_info": {
+    "project_number": "851392610313",
+    "firebase_url": "https://prueba-telconet-d4351-default-rtdb.firebaseio.com",
+    "project_id": "prueba-telconet-d4351",
+    "storage_bucket": "prueba-telconet-d4351.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:851392610313:android:7f5172bd72f260ffe7f8d8",
+        "android_client_info": {
+          "package_name": "com.example.prueba_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBbYtRi7S1kqYi5msJQK4ST7jEI9EgkTL8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:851392610313:android:f8c96cad55627ea6e7f8d8",
+        "android_client_info": {
+          "package_name": "com.example.prueba_telconet"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBbYtRi7S1kqYi5msJQK4ST7jEI9EgkTL8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
